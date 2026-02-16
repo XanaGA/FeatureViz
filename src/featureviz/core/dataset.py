@@ -14,13 +14,15 @@ class BaseDataset(Dataset, ABC):
         root_dir: str, 
         separation: int = 1, 
         shuffle: bool = False,
-        transform: Optional[Any] = None
+        transform: Optional[Any] = None,
+        processor: Optional[Any] = None
     ):
         self.root_dir = root_dir
         self.separation = separation
         self.shuffle = shuffle
         self.transform = transform
-        
+        self.processor = processor
+
         # This should be populated by the child class
         self.samples: List[Any] = self._load_samples()
         
@@ -44,8 +46,7 @@ class BaseDataset(Dataset, ABC):
     def __getitem__(self, idx: int) -> Dict[str, Any]:
         """
         Returns a dictionary containing:
-        - "image": torch.Tensor (transformed for the model)
-        - "viz_image": np.ndarray (original image for plotting)
+        - "pixels": torch.Tensor (transformed for the model)
         - "metadata": dict (filename, frame index, etc.)
         """
         pass
@@ -55,7 +56,7 @@ class BaseDataset(Dataset, ABC):
         return DataLoader(
             self, 
             batch_size=batch_size, 
-            shuffle=shuffle, # Shuffling not intra sample
+            shuffle=shuffle, # Shuffling inter sample
             num_workers=num_workers,
             pin_memory=True
         )
