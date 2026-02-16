@@ -1,0 +1,10 @@
+# Directories
+__pycache__
+*.egg-info
+outputs
+.vscode
+
+# Files
+*.h5
+*.pt
+*.pth

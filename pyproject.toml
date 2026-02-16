@@ -11,6 +11,23 @@ requires-python = "==3.12.*"
 authors = [{name = "Xavier Anadon", email = "xvanadon@gmail.com"}]
 
 dependencies = [
+    # Core
+    "torchvision >= 0.21.0",
+    "timm >= 1.0.12, < 2.0",
+    "einops >= 0.8.0, < 1.0",
+    "opencv-python >= 4.10.0",
+
+    # Scientific Computing
+    "numpy >= 1.26.0",
+    "scipy >= 1.13.0",
+
+    # Data & Storage
+    "pandas",
+    "h5py",
+
+    # Research Tools
+    "tqdm",
+    "fire >= 0.7.0",
 ]
 
 [tool.setuptools.packages.find]
